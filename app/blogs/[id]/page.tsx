@@ -8,7 +8,7 @@ const BlogPage = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
-  const blog = getBlogById(Number(id));
+  const blog = await getBlogById(Number(id));
 
   if (!blog) {
     notFound();
@@ -18,9 +18,9 @@ const BlogPage = async ({
     <main>
       <h1>{blog.title}</h1>
       <p>Author: {blog.author}</p>
-      <p>
+      {blog.url && <p>
         URL: <a href={blog.url}>{blog.url}</a>
-      </p>
+      </p>}
       <p>Likes: {blog.likes}</p>
       <form action={likeBlog}>
         <input type="hidden" name="id" value={blog.id} />

@@ -1,3 +1,7 @@
+import { eq } from "drizzle-orm";
+import { db } from "@/db";
+import { blogs as blogsTable } from "@/db/schema";
+
 export type Blog = {
   id: number;
   title: string;
@@ -6,61 +10,24 @@ export type Blog = {
   likes: number;
 };
 
-const blogs: Blog[] = [
-  {
-    id: 1,
-    title: "Refactoring My Toaster's Firmware",
-    author: "Priya Ashworth",
-    url: "https://blogosphere.dev/refactoring-toaster-firmware",
-    likes: 14,
-  },
-  {
-    id: 2,
-    title: "Why I Stopped Naming My Variables x",
-    author: "Declan Voss",
-    url: "https://blogosphere.dev/stopped-naming-variables-x",
-    likes: 3,
-  },
-  {
-    id: 3,
-    title: "A Beginner's Guide to Yelling at Compilers",
-    author: "Marisol Kaine",
-    url: "https://blogosphere.dev/yelling-at-compilers",
-    likes: 27,
-  },
-  {
-    id: 4,
-    title: "The Case for Naming Servers After Cheese",
-    author: "Priya Ashworth",
-    url: "https://blogosphere.dev/servers-named-after-cheese",
-    likes: 9,
-  },
-  {
-    id: 5,
-    title: "I Tried Pair Programming With My Dog",
-    author: "Declan Voss",
-    url: "https://blogosphere.dev/pair-programming-with-my-dog",
-    likes: 51,
-  },
-];
+export const getBlogs = async () => db.query.blogs.findMany();
 
-let nextId = 6;
+export const addBlog = async (title: string, author: string, url: string) =>
+  await db.insert(blogsTable).values({ title, author, url });
 
-export const getBlogs = () => {
-  return blogs;
-};
 
-export const addBlog = (title: string, author: string, url: string) => {
-  blogs.push({ id: nextId++, title, author, url, likes: 0 });
-};
+export const getBlogById = async (id: number) => await db.query.blogs.findFirst({
+  where: (blog, { eq }) => eq(blog.id, id),
+});
 
-export const getBlogById = (id: number) => {
-  return blogs.find((blog) => blog.id === id);
-};
 
-export const incrementLikes = (id: number) => {
-  const blog = blogs.find((blog) => blog.id === id);
-  if (blog) {
-    blog.likes += 1;
+export const incrementLikes = async (id: number) => {
+  const blog = await getBlogById(id);
+  if (!blog) {
+    throw new Error(`Blog with id ${id} not found`);
   }
+  await db
+    .update(blogsTable)
+    .set({ likes: blog.likes + 1 })
+    .where(eq(blogsTable.id, id));
 };

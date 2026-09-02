@@ -1,17 +1,17 @@
 import Link from "next/link";
 import { getBlogs } from "@/app/services/blogs";
 
-export default async function BlogsPage({
+export default async function Blogs({
   searchParams,
 }: {
   searchParams: Promise<{ filter?: string }>;
 }) {
   const { filter } = await searchParams;
-  const allBlogs = getBlogs();
+  const allBlogs = await getBlogs();
   const filtered = filter
     ? allBlogs.filter((blog) =>
-        blog.title.toLowerCase().includes(filter.toLowerCase())
-      )
+      blog.title?.toLowerCase().includes(filter.toLowerCase()) ?? ''
+    )
     : [...allBlogs];
   const blogs = filtered.sort((a, b) => b.likes - a.likes);
 
