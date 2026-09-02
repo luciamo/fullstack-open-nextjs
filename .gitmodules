@@ -1,3 +1,0 @@
-[submodule "blog-list"]
-	path = blog-list
-	url = git@github.com:luciamo/blog-list.git

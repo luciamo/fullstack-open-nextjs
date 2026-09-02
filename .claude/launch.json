@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "blog-list",
+      "name": "fullstack-open-nextjs",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "blog-list"],
+      "runtimeArgs": ["run", "dev"],
       "port": 3000
     }
   ]

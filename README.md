@@ -1,57 +1,20 @@
-# Full Stack Open
+# Full Stack Open: Next.js
 
-Repositório guarda-chuva com as soluções do curso [Full Stack Open](https://fullstackopen.com/).
+Repositório com as soluções do curso [Full Stack Open: Next.js](https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs) (Universidade de Helsinki), feito com Next.js.
 
-Cada exercício vive em seu próprio repositório git, incluído aqui como **submodule**. Isso permite manter histórico e deploy independentes por exercício (importante, por exemplo, para exercícios com backend que precisam de deploy próprio no Fly.io/Render).
+Segundo as instruções do curso, todos os exercícios ficam neste único repositório.
 
-## Estrutura
-
-```
-fullstack-open-nextjs/
-├── blog-list/   (submodule)
-├── ...
-└── ...
-```
-
-## Clonando este repositório
+## Rodando localmente
 
 ```bash
-git clone --recurse-submodules <url-deste-repo>
+npm install
+npm run dev
 ```
 
-Se já clonou sem `--recurse-submodules`:
+Abra [http://localhost:3000](http://localhost:3000).
 
-```bash
-git submodule update --init --recursive
-```
+## Exercícios
 
-## Adicionando um novo exercício
+### Chapter 2
 
-1. Crie o repositório remoto do exercício (ex: no GitHub).
-2. Adicione como submodule aqui:
-
-```bash
-git submodule add <url-do-repo-do-exercicio> nome-do-exercicio
-git commit -m "Add nome-do-exercicio submodule"
-```
-
-## Atualizando um submodule já existente
-
-Dentro da pasta do submodule, trabalhe normalmente (commit/push como um repo comum). Depois, no guarda-chuva, registre o novo commit referenciado:
-
-```bash
-cd nome-do-exercicio
-git add .
-git commit -m "..."
-git push
-
-cd ..
-git add nome-do-exercicio
-git commit -m "Update nome-do-exercicio submodule reference"
-```
-
-## Puxando atualizações de todos os submodules
-
-```bash
-git submodule update --remote --merge
-```
+- **1. Blog list** — navbar (home/blogs) e rota `/blogs` com lista hardcoded de blogs (`id`, `title`, `author`, `url`, `likes`). Sem estilização customizada.
