@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getBlogById } from "@/app/services/blogs";
+import { likeBlog } from "@/app/actions/blogs";
 
 const BlogPage = async ({
   params,
@@ -21,6 +22,10 @@ const BlogPage = async ({
         URL: <a href={blog.url}>{blog.url}</a>
       </p>
       <p>Likes: {blog.likes}</p>
+      <form action={likeBlog}>
+        <input type="hidden" name="id" value={blog.id} />
+        <button type="submit">Like</button>
+      </form>
     </main>
   );
 };
