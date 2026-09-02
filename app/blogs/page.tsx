@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getBlogs } from "@/app/services/blogs";
 
 export default function BlogsPage() {
-  const blogs = getBlogs();
+  const blogs = [...getBlogs()].sort((a, b) => b.likes - a.likes);
   return (
     <main>
       <h1>Blogs</h1>
