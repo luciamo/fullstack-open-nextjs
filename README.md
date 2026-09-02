@@ -18,3 +18,4 @@ Abra [http://localhost:3000](http://localhost:3000).
 ### Chapter 2
 
 - **1. Blog list** — navbar (home/blogs) e rota `/blogs` com lista hardcoded de blogs (`id`, `title`, `author`, `url`, `likes`). Sem estilização customizada.
+- **2. New blog** — rota `/blogs/new` com formulário (title, author, url) e Server Action (`createBlog`) que adiciona o blog à lista e redireciona para `/blogs`, com `revalidatePath` para funcionar também em produção.
