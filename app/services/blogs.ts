@@ -15,11 +15,10 @@ export const getBlogs = async () => db.query.blogs.findMany();
 export const addBlog = async (title: string, author: string, url: string) =>
   await db.insert(blogsTable).values({ title, author, url });
 
-
-export const getBlogById = async (id: number) => await db.query.blogs.findFirst({
-  where: (blog, { eq }) => eq(blog.id, id),
-});
-
+export const getBlogById = async (id: number) =>
+  await db.query.blogs.findFirst({
+    where: (blog, { eq }) => eq(blog.id, id),
+  });
 
 export const incrementLikes = async (id: number) => {
   const blog = await getBlogById(id);

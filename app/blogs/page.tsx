@@ -9,9 +9,10 @@ export default async function Blogs({
   const { filter } = await searchParams;
   const allBlogs = await getBlogs();
   const filtered = filter
-    ? allBlogs.filter((blog) =>
-      blog.title?.toLowerCase().includes(filter.toLowerCase()) ?? ''
-    )
+    ? allBlogs.filter(
+        (blog) =>
+          blog.title?.toLowerCase().includes(filter.toLowerCase()) ?? "",
+      )
     : [...allBlogs];
   const blogs = filtered.sort((a, b) => b.likes - a.likes);
 
@@ -25,7 +26,8 @@ export default async function Blogs({
       <ul>
         {blogs.map((blog) => (
           <li key={blog.id}>
-            <Link href={`/blogs/${blog.id}`}>{blog.title}</Link> by {blog.author} — {blog.likes} likes
+            <Link href={`/blogs/${blog.id}`}>{blog.title}</Link> by{" "}
+            {blog.author} — {blog.likes} likes
           </li>
         ))}
       </ul>
