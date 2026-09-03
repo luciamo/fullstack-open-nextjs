@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import "./globals.css";
+import SessionProvider from "./components/SessionProvider";
+import NavBar from "./components/NavBar";
 
 export const metadata: Metadata = {
   title: "Blog List",
@@ -11,12 +12,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body>
-        <nav>
-          <Link href="/">Home</Link> | <Link href="/blogs">Blogs</Link> |{" "}
-          <Link href="/users">Users</Link> |{" "}
-          <Link href="/blogs/new">Create new Blog</Link>
-        </nav>
-        {children}
+        <SessionProvider>
+          <NavBar />
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );

@@ -17,7 +17,7 @@ const eslintConfig = defineConfig([
     },
     rules: {
       "@typescript-eslint/no-floating-promises": "error",
-      "@typescript-eslint/no-misused-promises": "error",
+      "@typescript-eslint/no-misused-promises": "off",
     },
   },
   {

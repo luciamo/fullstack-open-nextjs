@@ -36,6 +36,13 @@
       "when": 1788430717456,
       "tag": "0004_colorful_doctor_doom",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1788436190921,
+      "tag": "0005_messy_baron_strucker",
+      "breakpoints": true
     }
   ]
 }
