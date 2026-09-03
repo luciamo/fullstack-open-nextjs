@@ -13,7 +13,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <nav>
           <Link href="/">Home</Link> | <Link href="/blogs">Blogs</Link> |{" "}
-          <Link href="/blogs/new">Create new</Link>
+          <Link href="/users">Users</Link> |{" "}
+          <Link href="/blogs/new">Create new Blog</Link>
         </nav>
         {children}
       </body>

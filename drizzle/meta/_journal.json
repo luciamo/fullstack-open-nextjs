@@ -22,6 +22,20 @@
       "when": 1788358721301,
       "tag": "0002_lazy_khan",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1788430329786,
+      "tag": "0003_solid_black_crow",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1788430717456,
+      "tag": "0004_colorful_doctor_doom",
+      "breakpoints": true
     }
   ]
 }
