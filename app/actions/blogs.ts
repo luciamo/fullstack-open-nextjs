@@ -10,7 +10,10 @@ const MIN_LENGTH = 5;
 const isValid = (value: string) => !!value && value.trim().length >= MIN_LENGTH;
 
 export const createBlog = async (
-  prevState: { error: string } | null,
+  prevState: {
+    error: string;
+    values: { title: string; author: string; url: string };
+  } | null,
   formData: FormData,
 ) => {
   const session = await auth();
@@ -25,6 +28,7 @@ export const createBlog = async (
   if (!isValid(title) || !isValid(author) || !isValid(url)) {
     return {
       error: `All fields must be at least ${MIN_LENGTH} characters long`,
+      values: { title, author, url },
     };
   }
 
