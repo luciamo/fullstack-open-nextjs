@@ -1,10 +1,14 @@
+"use client";
 import { createBlog } from "@/app/actions/blogs";
+import { useActionState } from "react";
 
 export default function NewBlogPage() {
+  const [state, formAction] = useActionState(createBlog, { error: "" });
+
   return (
     <main>
       <h1>Create a new blog</h1>
-      <form action={createBlog}>
+      <form action={formAction}>
         <div>
           <label>
             Title
@@ -24,6 +28,7 @@ export default function NewBlogPage() {
           </label>
         </div>
         <button type="submit">Create</button>
+        {state.error && <p style={{ color: "red" }}>{state.error}</p>}
       </form>
     </main>
   );
