@@ -1,6 +1,11 @@
 "use server";
 
-import { registerUser, UserAlreadyExistsError } from "@/app/services/users";
+import {
+  registerUser,
+  setUserToken,
+  UserAlreadyExistsError,
+} from "@/app/services/users";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 const MIN_LENGTH = 4;
@@ -61,4 +66,11 @@ export const createUser = async (
   }
 
   redirect("/login");
+};
+
+export const generateToken = async () => {
+  const newToken = crypto.randomUUID();
+
+  await setUserToken(newToken);
+  revalidatePath("/me");
 };

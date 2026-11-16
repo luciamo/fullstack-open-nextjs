@@ -1,6 +1,8 @@
+import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import bcrypt from "bcryptjs";
+import { getCurrentUser } from "./sessions";
 
 export const getUsers = async () => db.query.users.findMany();
 
@@ -36,4 +38,12 @@ export const registerUser = async (
   });
 
   return newUser;
+};
+
+export const setUserToken = async (token: string) => {
+  const user = await getCurrentUser();
+  if (!user) {
+    throw new Error("User not found");
+  }
+  await db.update(users).set({ token }).where(eq(users.id, user.id));
 };
