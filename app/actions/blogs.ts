@@ -12,13 +12,16 @@ const isValid = (value: string) => !!value && value.trim().length >= MIN_LENGTH;
 const message = (field: string) =>
   `${field} must be at least ${MIN_LENGTH} characters long`;
 
+interface CreateBlogState {
+  errors: { title?: string; author?: string; url?: string };
+  values: { title: string; author: string; url: string };
+  success: boolean;
+}
+
 export const createBlog = async (
-  prevState: {
-    errors: { title?: string; author?: string; url?: string };
-    values: { title: string; author: string; url: string };
-  } | null,
+  prevState: CreateBlogState | null,
   formData: FormData,
-) => {
+): Promise<CreateBlogState> => {
   const session = await auth();
   if (!session) {
     redirect("/login");
@@ -35,13 +38,13 @@ export const createBlog = async (
   };
 
   if (Object.values(errors).some(Boolean)) {
-    return { errors, values: { title, author, url } };
+    return { errors, values: { title, author, url }, success: false };
   }
 
   await addBlog(title, author, url);
 
   revalidatePath("/blogs");
-  redirect("/blogs");
+  return { errors: {}, values: { title, author, url }, success: true };
 };
 
 export const likeBlog = async (formData: FormData) => {
