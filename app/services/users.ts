@@ -47,3 +47,11 @@ export const setUserToken = async (token: string) => {
   }
   await db.update(users).set({ token }).where(eq(users.id, user.id));
 };
+
+export const getUserByToken = async (token: string) =>
+  await db.query.users.findFirst({
+    where: (user, { eq }) => eq(user.token, token),
+    with: {
+      blogs: true,
+    },
+  });
