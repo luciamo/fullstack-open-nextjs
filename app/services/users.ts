@@ -12,6 +12,8 @@ export const getUserWithBlogsByUsername = async (username: string) =>
     },
   });
 
+export class UserAlreadyExistsError extends Error {}
+
 export const registerUser = async (
   username: string,
   name: string,
@@ -24,7 +26,7 @@ export const registerUser = async (
   });
 
   if (userAlreadyExists) {
-    throw new Error("User already exists");
+    throw new UserAlreadyExistsError("User already exists");
   }
 
   const newUser = await db.insert(users).values({

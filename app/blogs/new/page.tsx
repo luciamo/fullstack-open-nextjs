@@ -4,7 +4,11 @@ import { useActionState } from "react";
 
 export default function NewBlogPage() {
   const [state, formAction] = useActionState(createBlog, {
-    error: "",
+    errors: {
+      title: undefined,
+      author: undefined,
+      url: undefined,
+    },
     values: {
       title: "",
       author: "",
@@ -50,7 +54,13 @@ export default function NewBlogPage() {
           </label>
         </div>
         <button type="submit">Create</button>
-        {state.error && <p style={{ color: "red" }}>{state.error}</p>}
+        {state.errors.title && (
+          <p style={{ color: "red" }}>{state.errors.title}</p>
+        )}
+        {state.errors.author && (
+          <p style={{ color: "red" }}>{state.errors.author}</p>
+        )}
+        {state.errors.url && <p style={{ color: "red" }}>{state.errors.url}</p>}
       </form>
     </main>
   );
